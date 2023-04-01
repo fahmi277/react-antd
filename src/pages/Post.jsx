@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Link } from 'react-router-dom';
 import axios from 'axios';
-import { Space, Table, Tag } from 'antd';
+import { Space, Table, Tag,Skeleton } from 'antd';
 const columns = [
     {
       title: 'Name',
@@ -39,7 +39,7 @@ useEffect(() => {
     const getData = async () => {
       try {
         const response = await axios.get(
-          `https://jsonplaceholder.typicode.com/posts?_limit=100`
+          `https://jsonplaceholder.typicode.com/posts?_limit=100`, {timeout: 10000}
         );
         setData(response.data);
         setPosts(response.data);
@@ -58,7 +58,7 @@ useEffect(() => {
   return (
     <div className="App">
       <h1>API Posts</h1>
-      {loading && <div>A moment please...</div>}
+      {/* {loading && <Skeleton></Skeleton>} */}
       {error && (
         <div>{`There is a problem fetching the post data - ${error}`}</div>
       )}
@@ -70,7 +70,7 @@ useEffect(() => {
             </li>
           ))}
       </ul> */}
-      <Table columns={columns} dataSource={posts} />
+      <Table columns={columns} dataSource={posts} loading = {loading} />
     </div>
   );
 

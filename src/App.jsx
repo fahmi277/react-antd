@@ -54,13 +54,14 @@ const App = () => {
           collapsed={collapsed}
           onCollapse={(value) => setCollapsed(value)}
         >
-          <div
+          {/* <div
             style={{
               height: 32,
               margin: 16,
               background: "rgba(255, 255, 255, 0.2)",
             }}
-          />
+          /> */}
+          <Header style={{color:'white'}}>Breedingo Farm</Header>
           <Menu
             theme="dark"
             defaultSelectedKeys={["1"]}
@@ -78,6 +79,10 @@ const App = () => {
             <Menu.Item key="2">
               <span>Meseros</span>
               <Link to="/form" />
+            </Menu.Item>
+            <Menu.Item key="3">
+              <span>login</span>
+              <Link to="/login" />
             </Menu.Item>
           </Menu>
         </Sider>
