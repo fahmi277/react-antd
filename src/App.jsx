@@ -5,11 +5,12 @@ import {
   DesktopOutlined,
   TeamOutlined,
 } from "@ant-design/icons";
-import { Breadcrumb, Layout, Menu, theme, Card, Space } from "antd";
+import { Breadcrumb, Layout, Menu, theme, Card, Space, Button } from "antd";
 import { useState } from "react";
-import TableView from "./pages/TableView";
-import FormDisabledDemo from "./pages/FormView";
-import DescriptionView from "./pages/DescriptionView";
+// import TableView from "./pages/TableView";
+// import FormDisabledDemo from "./pages/FormView";
+// import DescriptionView from "./pages/DescriptionView";
+import { Outlet, Link } from "react-router-dom";
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
   return {
@@ -34,7 +35,7 @@ const items = [
   ]),
   getItem("Files", "9", <FileOutlined />),
 ];
-const App =  () => {
+const App = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [dataClick, setData] = useState(0);
 
@@ -64,12 +65,21 @@ const App =  () => {
             theme="dark"
             defaultSelectedKeys={["1"]}
             mode="inline"
-            items={items}
+            // items={items}
             onSelect={(e) => {
               console.log(e.key);
               setData(e.key);
             }}
-          />
+          >
+            <Menu.Item key="1">
+              <span>Deshboard</span>
+              <Link to="/" />
+            </Menu.Item>
+            <Menu.Item key="2">
+              <span>Meseros</span>
+              <Link to="/form" />
+            </Menu.Item>
+          </Menu>
         </Sider>
         <Layout className="site-layout">
           <Header
@@ -83,7 +93,8 @@ const App =  () => {
               margin: "0 16px",
             }}
           >
-            <Breadcrumb
+            <Outlet />
+            {/* <Breadcrumb
               style={{
                 margin: "16px 0",
               }}
@@ -104,14 +115,21 @@ const App =  () => {
               ) : (
                 <FormDisabledDemo></FormDisabledDemo>
               )}
-            </div>
+            </div> */}
           </Content>
           <Footer
             style={{
               textAlign: "center",
             }}
           >
-            <Space direction="vertical">
+            <Link to="/form">
+              <Button type="primary">Primary Button</Button>
+            </Link>
+            <Link to="/post">
+              <Button type="primary">Ppst Button</Button>
+            </Link>
+
+            {/* <Space direction="vertical">
               <Card
                 title="Default size card"
                 extra={<a href="google.com">More</a>}
@@ -119,9 +137,9 @@ const App =  () => {
               >
                 <DescriptionView></DescriptionView>
               </Card>
-            </Space>
+            </Space> */}
 
-            <div>{dataClick && <h1>Messages: {dataClick}</h1>}</div>
+            {/* <div>{dataClick && <h1>Messages: {dataClick}</h1>}</div> */}
           </Footer>
         </Layout>
       </Layout>
@@ -129,3 +147,67 @@ const App =  () => {
   );
 };
 export default App;
+
+// import React, { useEffect } from 'react';
+// import axios from 'axios';
+
+// function Posts() {
+//   const [posts, setPosts] = useState([]);
+
+//   useEffect(() => {
+//     async function fetchData() {
+//       const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+//       setPosts(response.data);
+//       console.log(posts);
+//     }
+
+//     fetchData();
+//   }, []);
+
+//   return (
+//     <div>
+//       <h2>Posts</h2>
+//       <ul>
+//         {posts.map(post => (
+//           <li key={post.id}>
+//             <Link to={`/posts/${post.id}`}>{post.title}</Link>
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
+
+// function Post({ match }) {
+//   const [post, setPost] = useState(null);
+
+//   useEffect(() => {
+//     async function fetchData() {
+//       const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${match.params.id}`);
+//       setPost(response.data);
+//     }
+
+//     fetchData();
+//   }, [match.params.id]);
+
+//   if (!post) {
+//     return <div>Loading...</div>;
+//   }
+
+//   return (
+//     <div>
+//       <h2>{post.title}</h2>
+//       <p>{post.body}</p>
+//     </div>
+//   );
+// }
+
+// function App() {
+  
+//   return (
+//     Posts()
+//   );
+// }
+
+// export default App;
+

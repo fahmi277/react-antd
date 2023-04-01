@@ -1,4 +1,4 @@
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined } from '@ant-design/icons';
 import {
   Button,
   Cascader,
@@ -12,9 +12,8 @@ import {
   Switch,
   TreeSelect,
   Upload,
-} from "antd";
-import { useState } from "react";
-import AutoView from "./AutoView";
+} from 'antd';
+import { useState } from 'react';
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 const FormDisabledDemo = () => {
@@ -49,9 +48,7 @@ const FormDisabledDemo = () => {
             <Radio value="pear"> Pear </Radio>
           </Radio.Group>
         </Form.Item>
-        <Form.Item>
-          <AutoView></AutoView>
-        </Form.Item>
+        <Form.Item ></Form.Item>
         <Form.Item label="Input">
           <Input />
         </Form.Item>
@@ -65,12 +62,12 @@ const FormDisabledDemo = () => {
           <TreeSelect
             treeData={[
               {
-                title: "Light",
-                value: "light",
+                title: 'Light',
+                value: 'light',
                 children: [
                   {
-                    title: "Bamboo",
-                    value: "bamboo",
+                    title: 'Bamboo',
+                    value: 'bamboo',
                   },
                 ],
               },
@@ -81,12 +78,12 @@ const FormDisabledDemo = () => {
           <Cascader
             options={[
               {
-                value: "zhejiang",
-                label: "Zhejiang",
+                value: 'zhejiang',
+                label: 'Zhejiang',
                 children: [
                   {
-                    value: "hangzhou",
-                    label: "Hangzhou",
+                    value: 'hangzhou',
+                    label: 'Hangzhou',
                   },
                 ],
               },
