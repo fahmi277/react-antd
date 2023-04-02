@@ -6,15 +6,47 @@ import {
   MailOutlined,
   PhoneOutlined,
 } from "@ant-design/icons";
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 function RegisterForm() {
-    const navigate  = useNavigate ();
-  
-    const handleClick = () => {
-        navigate ('/');
-    };
-  const onFinish = (values) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/");
+  };
+  const API_BASE_URL = "http://localhost:3000/api/breedingo/account/create";
+
+  const api = axios.create({
+    baseURL: API_BASE_URL,
+    withCredentials: true,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    mode: "cors",
+  });
+  async function postData(dataUser) {
+    try {
+      const response = await api.post(
+        "http://localhost:3000/api/breedingo/account/create",
+        {
+          data: dataUser,
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  const onFinish = async (values) => {
     console.log("Received values of form: ", values);
+    const data = {
+      userEmail: values.username,
+      userPhone: values.phone,
+      userPassword: values.password,
+    };
+    console.log(data);
+    //  CreateUser(data);
+    // postData(data);
   };
   const backgroundImageUrl =
     "https://images.pexels.com/photos/162240/bull-calf-heifer-ko-162240.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
@@ -102,7 +134,7 @@ function RegisterForm() {
                   type="primary"
                   size="large"
                   style={{ fontWeight: "bold" }}
-                  onClick={handleClick}
+                  onClick={onFinish}
                 >
                   Coba akun demo
                 </Button>

@@ -2,11 +2,10 @@ import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import {
-  createBrowserRouter,
   RouterProvider,
-  createRoutesFromElements,
-  Route,
+
 } from "react-router-dom";
+import RouterPath from "./routes/routes";
 import TableView from "./pages/TableView";
 import { Skeleton, Watermark } from "antd";
 import LoginForm from "./pages/user/login/Login";
@@ -31,34 +30,7 @@ async function fetchProject(id) {
     throw new Error("Could not fetch project");
   }
 }
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element:<App/>,
-    children:[
-      {
-        path:"form",
-        element:<TableView/>
-      },
-      {
-        path:"post",
-        element:<Suspense> <AppPost></AppPost> </Suspense>
-      },
-    ]
-  },
-  {
-    path:"login",
-    element:<LoginForm></LoginForm>
-  },
-  {
-    path:"register",
-    element:<RegisterForm></RegisterForm>
-  },
-  {
-    path:"demo",
-    element:<WatermarkView></WatermarkView>
-  }
-]);
+
 // const router = createBrowserRouter(
 //   createRoutesFromElements(
 //     <Suspense fallback = {<Skeleton></Skeleton>}>
@@ -77,6 +49,6 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     {/* <App /> */}
-    <RouterProvider router={router} />
+    <RouterProvider router={RouterPath} />
   </React.StrictMode>
 );

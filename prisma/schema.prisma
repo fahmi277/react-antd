@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model cattle {
+  farmId        String
+  cattleAge     Float
+  cattleAnimal  String
+  cattleGender  String
+  cattleHealth  String
+  cattleId      String
+  cattleIsSale  Boolean
+  cattlePrice   Int
+  cattleSpecies String
+  cattleWeigth  Float
+  id            Int     @id @default(autoincrement())
+  cattleLable   String
+
+  @@index([farmId], map: "Cattle_farmId_idx")
+}
+
+model farm {
+  farmId       String @unique(map: "Farm_farmId_key")
+  farmLocation String
+  farmName     String
+  id           Int    @id @default(autoincrement())
+  userId       String
+
+  @@index([userId], map: "Farm_userId_idx")
+}
+
+model user {
+  userEmail    String @unique(map: "User_userEmail_key")
+  userId       String @id
+  userPassword String
+  userPhone    String
+}

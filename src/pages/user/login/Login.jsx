@@ -3,16 +3,20 @@ const { Title } = Typography;
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useNavigate,useLocation   } from 'react-router-dom';
 import './PageTransition.css';
+
+
+
 function LoginForm() {
     const navigate  = useNavigate ();
-    const location = useLocation();
+    // const location = useLocation();
   
-    const handleClick = () => {
-        navigate ('/');
+    const handleClick = (values) => {
+        navigate ('/',{state:{farmName:JSON.stringify(values)}});
     };
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
-    handleClick()
+    handleClick(values);
+
   };
 
   const backgroundImageUrl = 'https://images.pexels.com/photos/162240/bull-calf-heifer-ko-162240.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
@@ -30,8 +34,8 @@ function LoginForm() {
         backgroundSize: 'cover', 
         
       }}
-    //   className="login-page"
-    className={`page entering`}
+      className="login-page"
+    // className={`page entering`}
     >
       <Card style={{ width: "25%" }}>
         <Title level={2}>Breedingo Login</Title>
